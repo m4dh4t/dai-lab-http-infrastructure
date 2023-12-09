@@ -4,3 +4,7 @@ services:
     build: web
     ports:
     - "8080:80"
+  api:
+    build: api
+    ports:
+    - "8081:80"

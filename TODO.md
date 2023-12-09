@@ -91,7 +91,7 @@ This step requires a more work. The goal is to build a HTTP API with Javalin. Yo
 
 Use your imagination and be creative!
 
-The only requirement is that the API supports at all CRUD operations, i.e.: Create, Read, Update, Delete. 
+The only requirement is that the API supports at all CRUD operations, i.e.: Create, Read, Update, Delete.
 
 Use a API testing tool such as Insomnia, Hoppscotch or Bruno to test all these operations.
 
@@ -101,14 +101,13 @@ Once you're finished with the implementation, create a Dockerfile for the API se
 
 ### Acceptance criteria
 
-- [ ] Your API supports all CRUD operations.
-- [ ] You are able to explain your implementation and walk us through the code.
-- [ ] You can start and stop the API server using docker compose.
-- [ ] You can access both the API and the static server from your browser.
-- [ ] You can rebuild the docker image with docker compose.
-- [ ] You can do demo where use an API testing tool to show that all CRUD operations work.
-- [ ] You have **documented** your implementation in your report.
-
+- [x] Your API supports all CRUD operations.
+- [x] You are able to explain your implementation and walk us through the code.
+- [x] You can start and stop the API server using docker compose.
+- [x] You can access both the API and the static server from your browser.
+- [x] You can rebuild the docker image with docker compose.
+- [x] You can do demo where use an API testing tool to show that all CRUD operations work.
+- [x] You have **documented** your implementation in your report.
 
 Step 4: Reverse proxy with Traefik
 ----------------------------------

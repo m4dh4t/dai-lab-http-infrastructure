@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "DAI_Lab05-HTTP-API-Tests",
+  "type": "collection",
+  "presets": {
+    "requestType": "http",
+    "requestUrl": "http://localhost:8081/"
+  }
+}
