@@ -23,7 +23,7 @@ To test the image, we used the `docker build` command to build the image and the
 Step 2: Docker compose
 ----------------------
 
-To allow for an easier deployment of the static Web site, we decided to use Docker compose. We added a `docker-compose.yml` file in the root directory of the repository to start the static Web site. We used the `build` instruction to build the image from the `web` directory and the `ports` instruction to map the port 80 of the container to the port 8080 of the host.
+To allow for an easier deployment of the static Web site, we used Docker compose. We added a `docker-compose.yml` file in the root directory of the repository to start the static Web site. We used the `build` instruction to build the image from the `web` directory and the `ports` instruction to map the port 80 of the container to the port 8080 of the host.
 
 To test the Docker compose file, we used the `docker-compose up` command to start the container and verified that the static Web site was accessible from the host. We also modified the static web site to verify that the changes were taken into account when rebuilding the image using `docker-compose build`.
 
@@ -39,7 +39,7 @@ We decided to implement a simple HTTP API server to manage a TODO list, where a 
 - Update a TODO
 - Get a specific TODO
 
-The API uses Javalin to handle the HTTP requests and the TODOs are stored in-memory in an ArrayList. The API is implemented in the `api/src` directory and the Dockerfile to run it is in the `api` directory. The Dockerfile is built on top of the `openjdk:21` image and simply copies the built `TodoApi-1.0.jar` from the `target` directory to the `/app` directory of the image and runs it using the `java -jar` command. To bundle all the API dependencies in the `.jar` file and prevent any missing dependency exceptions, we used the `maven-shade-plugin` plugin in the `pom.xml` file which will be called when running the `mvn package` command.
+The API uses Javalin to handle the HTTP requests and the TODOs are stored in-memory in an `ArrayList`. The API is implemented in the `api/src` directory and the Dockerfile to run it is in the `api` directory. The Dockerfile is built on top of the `openjdk:21` image and simply copies the built `TodoApi-1.0.jar` from the `target` directory to the `/app` directory of the image and runs it using the `java -jar` command. To bundle all the API dependencies in the `.jar` file and prevent any missing dependency exceptions, we used the `maven-shade-plugin` plugin in the `pom.xml` file which will be called when running the `mvn package` command.
 
 The API is exposed by default on port 80, and to allow for an easy mapping depending on the user configuration, we added the service to the Docker compose file and used the `build` instruction to build the image from the `api` directory and the `ports` instruction to map the port 80 of the container to the port 8081 of the host.
 
@@ -48,7 +48,11 @@ To test the API, we first ran it using the `docker-compose up` command and then 
 Step 4: Reverse proxy with Traefik
 ----------------------------------
 
+To implement the reverse proxy, we first added a new `reverse-proxy` service to the Docker compose file. We used the `image` instruction to use the `traefik:v2.10` image and the `ports` instruction to expose the ports 80 and 8080 of the container. We also used the `volumes` instruction to mount the Docker socket to the container to allow Traefik to listen to Docker events and the `command` instruction to specify the provider, as described in the [Quick-Start documentation](https://doc.traefik.io/traefik/getting-started/quick-start/).
 
+We then added the `web` and `api` services to the `reverse-proxy` service by using the `labels` instruction to specify the Traefik configuration for each service, where `traefik.http.routers.<service>.rule=Host('localhost')` exposes the service on the `localhost` address and `traefik.http.routers.<service>.rule=PathPrefix('/<path>')` specifies the path prefix for the service. As specified in the [documentation](https://doc.traefik.io/traefik/routing/providers/docker/), Traefik will automatically uses the first exposed port of a container as the default port for the service. To use this feature, we used the `expose` instruction in the Docker compose file to expose the port 80 of the `web` service and the port 80 of the `api` service, which prevents us from having to specify the port in the Traefik configuration using `traefik.http.services.xxx.loadbalancer.server.port`.
+
+To test the reverse proxy, we first ran it using the `docker-compose up` command and then verified that the static Web site and the API were accessible from the host browser using the `localhost` address and the `localhost/api` address respectively.
 
 Step 5: Scalability and load balancing
 --------------------------------------
