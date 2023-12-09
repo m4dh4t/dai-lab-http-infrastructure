@@ -16,13 +16,16 @@ To have a nice landing page, we decided to use a bootstrap template from [Start 
 
 We then added a Dockerfile in the `web` directory built on top of the `nginx` image to serve the static files and an `nginx.conf` file to configure the server to listen on port 80 and to serve the static files from the `/usr/share/nginx/html` directory.
 
-The only thing we had to do was to use the `COPY` instruction in the Dockerfile to copy the static files from the `static` directory to the `/usr/share/nginx/html` directory and the `nginx.conf` file to the `/etc/nginx/nginx.conf` file to configure the server.
+The only thing we had to do add in the Dockerfile is the `COPY` instruction to copy the static files from the `static` directory to the `/usr/share/nginx/html` directory and the `nginx.conf` file to the `/etc/nginx/nginx.conf` file to configure the server.
 
 To test the image, we used the `docker build` command to build the image and the `docker run` command to run the container. We used the `-p` option to expose the port 80 of the container to the port 8080 of the host and verified that the static Web site was accessible from the host.
 
 Step 2: Docker compose
 ----------------------
 
+To allow for an easier deployment of the static Web site, we decided to use Docker compose. We added a `docker-compose.yml` file in the root directory of the repository to start the static Web site. We used the `build` instruction to build the image from the `web` directory and the `ports` instruction to expose the port 80 of the container to the port 8080 of the host.
+
+To test the Docker compose file, we used the `docker-compose up` command to start the container and verified that the static Web site was accessible from the host. We also modified the static web site to verify that the changes were taken into account when rebuilding the image using `docker-compose build`.
 
 Step 3: HTTP API server
 -----------------------

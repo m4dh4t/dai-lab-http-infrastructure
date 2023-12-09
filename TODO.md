@@ -38,7 +38,6 @@ General instructions
 - **You have to write a report with a short descriptioin for each of the steps.** Please do that directly in the repo, in one or more markdown files. Start in the README.md file at the root of your directory.
 - The report must contain the procedure that you have followed to prove that your configuration is correct (what you did do make the step work and what you would do if you were doing a demo).
 
-
 Step 0: GitHub repository
 -------------------------
 
@@ -52,7 +51,6 @@ Create a GitHub repository for your project. You will use this repository to col
 - [x] You have created a GitHub repository for your project.
 - [x] The respository contains a Readme file that you will use to document your project.
 
-
 Step 1: Static Web site
 -----------------------
 
@@ -60,13 +58,12 @@ The goal of this step is to build a Docker image that contains a static HTTP ser
 
 ### Acceptance criteria
 
-- [ ] You have created a separate folder in your respository for your static Web server.
-- [ ] You have a Dockerfile based on the Nginx image. The Dockerfile copies the static site content into the image.
-- [ ] You have configured the `nginx.conf` configuration file to serve the static content on a port (normally 80).
-- [ ] You are able to explain the content of the `nginx.conf` file.
-- [ ] You can run the image and access the static content from a browser.
-- [ ] You have **documented** your configuration in your report.
-
+- [x] You have created a separate folder in your respository for your static Web server.
+- [x] You have a Dockerfile based on the Nginx image. The Dockerfile copies the static site content into the image.
+- [x] You have configured the `nginx.conf` configuration file to serve the static content on a port (normally 80).
+- [x] You are able to explain the content of the `nginx.conf` file.
+- [x] You can run the image and access the static content from a browser.
+- [x] You have **documented** your configuration in your report.
 
 Step 2: Docker compose
 ----------------------
@@ -77,12 +74,11 @@ In addition to the basic docker compose configuration, we want to be able to reb
 
 ### Acceptance criteria
 
-- [ ] You have added a docker compose configuration file to your GitHub repo.
-- [ ] You can start and stop an infrastructure with a single static Web server using docker compose.
-- [ ] You can access the Web server on your local machine on the respective port.
-- [ ] You can rebuild the docker image with `docker compose build`
-- [ ] You have **documented** your configuration in your report.
-
+- [x] You have added a docker compose configuration file to your GitHub repo.
+- [x] You can start and stop an infrastructure with a single static Web server using docker compose.
+- [x] You can access the Web server on your local machine on the respective port.
+- [x] You can rebuild the docker image with `docker compose build`
+- [x] You have **documented** your configuration in your report.
 
 Step 3: HTTP API server
 -----------------------
