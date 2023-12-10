@@ -57,7 +57,9 @@ To test the reverse proxy, we first ran it using the `docker-compose up` command
 Step 5: Scalability and load balancing
 --------------------------------------
 
+To scale our services such as multiple instances are started at once, we used the `deploy.replicas` instruction in the Docker compose file to specify the number of instances to start for each service. Once running using `docker-compose up`, we then used the `docker-compose up --scale <service>=<number>` command to scale the numbers of instances of a given service.
 
+To verify that the load balancing was working as expected, we verified in the Traefik dashboard that the number of instances was correctly displayed under the `Servers` part of each service and we also verified that upon issuing several requests to the services, the requests were correctly distributed among the different instances.
 
 Step 6: Load balancing with round-robin and sticky sessions
 -----------------------------------------------------------

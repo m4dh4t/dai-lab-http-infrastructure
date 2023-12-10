@@ -2,12 +2,18 @@ version: '3.8'
 services:
   web:
     build: web
+    deploy:
+      mode: replicated
+      replicas: 4
     expose:
       - 80
     labels:
       - "traefik.http.routers.web.rule=Host(`localhost`)"
   api:
     build: api
+    deploy:
+      mode: replicated
+      replicas: 2
     expose:
       - 80
     labels:
