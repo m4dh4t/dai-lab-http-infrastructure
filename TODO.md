@@ -199,7 +199,7 @@ Once you got the two files (certificate and key), you can place them into a fold
 
 ### Traefik configuration file
 
-Up to now, you've configured Traefik through labels directely in the docker compose file. However, it is not possible to specify the location of the certificates to Traefik with labels. You have to create a configuration file `traefik.yaml`. 
+Up to now, you've configured Traefik through labels directely in the docker compose file. However, it is not possible to specify the location of the certificates to Traefik with labels. You have to create a configuration file `traefik.yaml`.
 
 Again, you have to mount this file into the Traefik container as a volume, at the location `/etc/traefik/traefik.yaml`.
 
@@ -227,10 +227,8 @@ If it does not work, go to the Traefik dashboard and check the configuration of 
 
 ### Acceptance criteria
 
-- [ ] You can do a demo where you show that the static and dynamic servers are accessible through HTTPS.
-- [ ] You have **documented** your configuration in your report.
-
-
+- [x] You can do a demo where you show that the static and dynamic servers are accessible through HTTPS.
+- [x] You have **documented** your configuration in your report.
 
 Optional steps
 ==============

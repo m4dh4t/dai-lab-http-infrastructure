@@ -71,7 +71,17 @@ To validate that the load balancing with round-robin was working as expected, we
 Step 7: Securing Traefik with HTTPS
 -----------------------------------
 
+To secure the traffic between the host and Traefik using HTTPS, we first generated a self-signed certificate using the `openssl` command and stored the certificate and the key in the `certificates` directory:
 
+```bash
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3650 -nodes -subj "/C=CH/O=HEIG-VD/CN=localhost"
+```
+
+We then created a new `traefik.yml` configuration file where we specified the endpoint to use for the [Docker provider](https://doc.traefik.io/traefik/providers/docker/#configuration-examples) and [entrypoints](https://doc.traefik.io/traefik/routing/entrypoints/#configuration-examples) sections as described in the configuration examples to use two different ports for HTTP and HTTPS traffic. We also added the `tls` section to specify the certificate and the key to use for the HTTPS connection giving the path to the certificate and the key in the `certificates` directory mapped to the `/etc/traefik/certificates` directory of the container using the `volumes` instruction in the Docker compose file. We also added the `api` instruction to enable the Traefik dashboard and removed the `command` instruction originally set in the Docker compose file to use the new configuration file instead.
+
+In the Docker compose file, we also added new routers to handle the HTTPS traffic and allow both HTTP and HTTPS traffic on the `web` and `api` services. We used the `traefik.http.routers.<service>.entrypoints` instruction to specify the ports to use for the service and the `traefik.http.routers.<service>.tls` instruction to enable the HTTPS redirection. Finally, we added port `443` to the `ports` instruction of the `reverse-proxy` service to expose the HTTPS port of the container to the host, and mapped the `traefik.yml` configuration file to the `/etc/traefik/traefik.yml` directory of the container using the `volumes` instruction.
+
+To validate that both the HTTP and HTTPS traffic were correctly handled, we first ran the reverse proxy using the `docker-compose up` command and verified that the static Web site and the API were accessible from the host browser using the `localhost` and `https://localhost` address and the `localhost/api` and `https://localhost/api` address respectively. A quick look at the Traefik dashboard also showed that the HTTPS traffic was correctly handled.
 
 Optional steps
 ==============
