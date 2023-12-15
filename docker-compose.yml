@@ -4,7 +4,7 @@ services:
     build: web
     deploy:
       mode: replicated
-      replicas: 4
+      replicas: 2
     expose:
       - 80
     labels:
@@ -13,12 +13,12 @@ services:
     build: api
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 4
     expose:
       - 80
     labels:
       - "traefik.http.routers.api.rule=Host(`localhost`) && PathPrefix(`/api`)"
-      #- "traefik.http.services.myservice.loadbalancer.sticky.cookie=true"
+      - "traefik.http.services.myservice.loadbalancer.sticky.cookie=true"
   reverse-proxy:
     image: traefik:v2.10
     command: --api.insecure=true --providers.docker

@@ -1,15 +1,35 @@
-from requests import Session
+import requests
 
 
 def main():
+    # With cookies
     # Create session
-    s = Session()
+    s = requests.Session()
 
-    # Create new TODO item
+    # Create new items
     for i in range(10):
-        r = s.post('http://localhost/api/todos', data={f"TODO {i}"})
-        print(r.status_cod, r.text)
+        r = s.post('http://localhost/api/', data=f'Item {i}')
+        print(r.text)
 
+    # Get all items
+    r = s.get('http://localhost/api/')
+    print(r.text)
+
+    # Without cookies
+    # Create new items
+    for i in range(10):
+        r = requests.post('http://localhost/api/', data=f'Item {i}')
+        print(r.text)
+
+    # Get all items
+    r = requests.get('http://localhost/api/')
+    print(r.text)
+    r = requests.get('http://localhost/api/')
+    print(r.text)
+    r = requests.get('http://localhost/api/')
+    print(r.text)
+    r = requests.get('http://localhost/api/')
+    print(r.text)
 
 
 if __name__ == '__main__':

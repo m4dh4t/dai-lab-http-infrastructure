@@ -64,6 +64,9 @@ To verify that the load balancing was working as expected, we verified in the Tr
 Step 6: Load balancing with round-robin and sticky sessions
 -----------------------------------------------------------
 
+To use sticky sessions on the API service, we added the `traefik.http.services.api.loadbalancer.sticky.cookie=true` instruction to the Traefik configuration of the `api` service. Using a Python script, we then verified that upon issuing several requests to the API, the requests were correctly forwarded to the same instance when sent in the same session and to different instances when sent in different sessions.
+
+To validate that the load balancing with round-robin was working as expected, we simply issued several requests to the static Web site from our browser and verified that the requests were correctly distributed among the different instances of the `web` service.
 
 Step 7: Securing Traefik with HTTPS
 -----------------------------------
