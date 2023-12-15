@@ -52,7 +52,7 @@ To implement the reverse proxy, we first added a new `reverse-proxy` service to 
 
 We then added the `web` and `api` services to the `reverse-proxy` service by using the `labels` instruction to specify the Traefik configuration for each service, where `traefik.http.routers.<service>.rule=Host('localhost')` exposes the service on the `localhost` address and `traefik.http.routers.<service>.rule=PathPrefix('/<path>')` specifies the path prefix for the service. As specified in the [documentation](https://doc.traefik.io/traefik/routing/providers/docker/), Traefik will automatically uses the first exposed port of a container as the default port for the service. To use this feature, we used the `expose` instruction in the Docker compose file to expose the port 80 of the `web` service and the port 80 of the `api` service, which prevents us from having to specify the port in the Traefik configuration using `traefik.http.services.xxx.loadbalancer.server.port`.
 
-To test the reverse proxy, we first ran it using the `docker-compose up` command and then verified that the static Web site and the API were accessible from the host browser using the `localhost` address and the `localhost/api` address respectively.
+To test the reverse proxy, we first ran it using the `docker-compose up` command and then verified that the static Web site and the API were accessible from the host browser using the `localhost` address and the `localhost/api` address respectively. We then updated the Bruno collection stored in `api/tests` to use the `localhost/api` address and verified that the requests were correctly forwarded to the API.
 
 Step 5: Scalability and load balancing
 --------------------------------------

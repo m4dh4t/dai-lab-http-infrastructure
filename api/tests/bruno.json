@@ -4,6 +4,6 @@
   "type": "collection",
   "presets": {
     "requestType": "http",
-    "requestUrl": "http://localhost:8081/"
+    "requestUrl": "http://localhost/api/"
   }
 }

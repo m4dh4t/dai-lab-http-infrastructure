@@ -12,12 +12,12 @@ public class TodoApi {
     public static void main(String[] args) {
         Javalin app = Javalin.create().start(80);
 
-        app.get("/todos", TodoApi::getAllTodos);
-        app.delete("/todos", TodoApi::deleteAllTodos);
-        app.post("/todos", TodoApi::createTodo);
-        app.get("/todos/{id}", TodoApi::getTodo);
-        app.put("/todos/{id}", TodoApi::updateTodo);
-        app.delete("/todos/{id}", TodoApi::deleteTodo);
+        app.get("/api", TodoApi::getAllTodos);
+        app.delete("/api", TodoApi::deleteAllTodos);
+        app.post("/api", TodoApi::createTodo);
+        app.get("/api/{id}", TodoApi::getTodo);
+        app.put("/api/{id}", TodoApi::updateTodo);
+        app.delete("/api/{id}", TodoApi::deleteTodo);
 
         Runtime.getRuntime().addShutdownHook(new Thread(app::stop));
     }

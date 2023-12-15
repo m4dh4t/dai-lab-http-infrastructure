@@ -32,3 +32,6 @@ dependency-reduced-pom.xml
 
 # OS-specific files
 .DS_Store
+
+# Python
+venv/

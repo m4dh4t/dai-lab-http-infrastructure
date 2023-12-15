@@ -123,7 +123,7 @@ The steps to follow for this section are thus:
 - Read the [Traefik & Docker](https://doc.traefik.io/traefik/routing/providers/docker/) documentation to learn how to configure Traefik to work with Docker.
 - Then implement the reverse proxy:
   - relay the requests coming to "localhost" to the static HTTP server
-  - relay the requests coming to "localhost/api" to the API server. See the [Traefik router documentation](https://doc.traefik.io/traefik/routing/routers/) for managing routes based on path prefixes. 
+  - relay the requests coming to "localhost/api" to the API server. See the [Traefik router documentation](https://doc.traefik.io/traefik/routing/routers/) for managing routes based on path prefixes.
   - you will have to remove the `ports` configuration from the static and dynamic server in the docker compose file and replace them with `expose` configuration. Traefik will then be able to access the servers through the internal Docker network.
 - You can use the [Traefik dashboard](https://doc.traefik.io/traefik/operations/dashboard/) to monitor the state of the reverse proxy.
 
@@ -163,11 +163,10 @@ The goal of this step is to change the configuration such that:
 
 ### Acceptance criteria
 
-- [ ] You do a setup to demonstrate the notion of sticky session.
-- [ ] You prove that your load balancer can distribute HTTP requests in a round-robin fashion to the static server nodes (because there is no state).
-- [ ] You prove that your load balancer can handle sticky sessions when forwarding HTTP requests to the dynamic server nodes.
-- [ ] You have **documented** your configuration and your validation procedure in your report.
-
+- [x] You do a setup to demonstrate the notion of sticky session.
+- [x] You prove that your load balancer can distribute HTTP requests in a round-robin fashion to the static server nodes (because there is no state).
+- [x] You prove that your load balancer can handle sticky sessions when forwarding HTTP requests to the dynamic server nodes.
+- [x] You have **documented** your configuration and your validation procedure in your report.
 
 Step 7: Securing Traefik with HTTPS
 -----------------------------------
