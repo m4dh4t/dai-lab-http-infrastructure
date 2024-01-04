@@ -96,3 +96,6 @@ Once running using `docker-compose up`, we perfomed the [initial setup](https://
 Optional step 2: Integration API - static Web site
 --------------------------------------------------
 
+To integrate the API with the static Web site, we used Javascript Fetch API to issue requests to the API from the static Web site. We first added a button and a container to request and display the TODO list in the `index.html` file. We then edited the `scripts.js` file to add a `fetchData` function that will issue a `GET` request to the API and if there is any, parse the JSON list of TODOs and display create an HTML list of TODOs, while also handling any errors that might occur and displaying them accordingly.
+
+To test the integration, we first ran the reverse proxy using the `docker-compose up` command and verified that the static Web site was accessible from the host browser using the `localhost` address. We then clicked on the button to request the TODO list and verified that the list was correctly displayed, with or without any TODOs returned by the API.

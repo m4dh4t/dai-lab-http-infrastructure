@@ -2,7 +2,7 @@ import requests
 
 
 def main():
-    # With cookies
+    print("--- Sticky session ---")
     # Create session
     s = requests.Session()
 
@@ -15,7 +15,7 @@ def main():
     r = s.get('http://localhost/api/')
     print(r.text)
 
-    # Without cookies
+    print("\n--- No sticky session ---")
     # Create new items
     for i in range(10):
         r = requests.post('http://localhost/api/', data=f'Item {i}')
