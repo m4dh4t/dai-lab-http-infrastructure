@@ -89,6 +89,9 @@ Optional steps
 Optional step 1: Management UI
 ------------------------------
 
+To add a management UI to our infrastructure, we decided to use [Portainer](https://www.portainer.io/). We first added a new `portainer` service to the Docker compose file. We used the `image` instruction to use the `portainer/portainer-ce` image and the `ports` instruction to expose the ports 8000 and 9443 of the container, as stated in the [documentation](https://docs.portainer.io/start/install/server/docker/wsl). We also used the `volumes` instruction to mount the Docker socket to the container to allow Portainer to listen to Docker events and to mount the `portainer_data` to the `/data` directory of the container to persist the Portainer data. To also use TLS for the Portainer UI, we used the `command` instruction to specify the `--sslcert` and `--sslkey` flags to specify the path to the certificate and the key in the `certificates` directory mapped to the `/certs` directory of the container using the `volumes` instruction, as we did for Traefik.
+
+Once running using `docker-compose up`, we perfomed the [initial setup](https://docs.portainer.io/start/install/server/setup) of Portainer and verified that the management UI was accessible from the host browser using the `localhost:8000` address. We then selected our stack in the `Local` environment and verified that the different services were correctly displayed. To verify that Portainer was able to correctly manage our stack, we perfomed several actions such as removing or restarting some instances, and verified that the changes were correctly applied. When scaling the number of instances of a given service, we also verified that the load balancing was working as expected by checking the number of instances displayed in the Traefik dashboard.
 
 Optional step 2: Integration API - static Web site
 --------------------------------------------------

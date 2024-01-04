@@ -233,7 +233,7 @@ If it does not work, go to the Traefik dashboard and check the configuration of 
 Optional steps
 ==============
 
-If you sucessfully complete all the steps above, you can reach a grade of 5.0. If you want to reach a higher grade, you can do one or more of the following optional steps. 
+If you sucessfully complete all the steps above, you can reach a grade of 5.0. If you want to reach a higher grade, you can do one or more of the following optional steps.
 
 Optional step 1: Management UI
 ------------------------------
@@ -245,10 +245,9 @@ The goal of this step is to deploy or develop a Web app that can be used to moni
 
 ### Acceptance criteria
 
-- [ ] You can do a demo to show the Management UI and manage the containers of your infrastructure.
-- [ ] You have **documented** how to use your solution.
-- [ ] You have **documented** your configuration in your report.
-
+- [x] You can do a demo to show the Management UI and manage the containers of your infrastructure.
+- [x] You have **documented** how to use your solution.
+- [x] You have **documented** your configuration in your report.
 
 Optional step 2: Integration API - static Web site
 --------------------------------------------------
@@ -259,13 +258,10 @@ The goal of this step is to change your static Web page to periodically make cal
 
 Keep it simple! You can start by just making a GET request to the API server and display the result on the page. If you want, you can then you can add more features, but this is not obligatory.
 
-
 The modern way to make such requests is to use the [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). But you can also use JQuery if you prefer.
-
 
 ### Acceptance criteria
 
 - [ ] You have added JavaScript code to your static Web page to make at least a GET request to the API server.
 - [ ] You can do a demo where you show that the API is called and the result is displayed on the page.
 - [ ] You have **documented** your implementation in your report.
-

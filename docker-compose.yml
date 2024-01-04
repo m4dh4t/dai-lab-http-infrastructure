@@ -37,3 +37,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./certificates:/etc/traefik/certificates
       - ./traefik.yml:/etc/traefik/traefik.yml
+  portainer:
+    image: portainer/portainer-ce:latest
+    command: --sslcert /certs/cert.pem --sslkey /certs/key.pem
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./certificates:/certs
+      - portainer_data:/data
+volumes:
+  portainer_data:
