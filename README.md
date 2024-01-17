@@ -50,7 +50,31 @@ Step 4: Reverse proxy with Traefik
 
 To implement the reverse proxy, we first added a new `reverse-proxy` service to the Docker compose file. We used the `image` instruction to use the `traefik:v2.10` image and the `ports` instruction to expose the ports 80 and 8080 of the container. We also used the `volumes` instruction to mount the Docker socket to the container to allow Traefik to listen to Docker events and the `command` instruction to specify the provider, as described in the [Quick-Start documentation](https://doc.traefik.io/traefik/getting-started/quick-start/).
 
+<<<<<<< HEAD
 We then added the `web` and `api` services to the `reverse-proxy` service by using the `labels` instruction to specify the Traefik configuration for each service, where `traefik.http.routers.<service>.rule=Host('localhost')` exposes the service on the `localhost` address and `traefik.http.routers.<service>.rule=PathPrefix('/<path>')` specifies the path prefix for the service. As specified in the [documentation](https://doc.traefik.io/traefik/routing/providers/docker/), Traefik will automatically uses the first exposed port of a container as the default port for the service. To use this feature, we used the `expose` instruction in the Docker compose file to expose the port 80 of the `web` service and the port 80 of the `api` service, which prevents us from having to specify the port in the Traefik configuration using `traefik.http.services.xxx.loadbalancer.server.port`.
+=======
+You will use [Traefik](https://traefik.io/traefik/) as a reverse proxy. Traefik interfaces directly with Docker to obtain the list of active backend servers. This means that it can dynamically adjust to the number of running server. Traefik has the particularity that it can be configured using labels in the docker compose file. This means that you do not need to write a configuration file for Traefik, but Traefik will read container configurations from the docker engine through the file `/var/run/docker.sock`.
+
+The steps to follow for this section are thus:
+
+- Add a new service "reverse_proxy" to your docker compose file using the Traefik docker image
+- Read the [Traefik Quick Start](https://doc.traefik.io/traefik/getting-started/quick-start/) documentation to establish the basic configuration.
+- Read the [Traefik & Docker](https://doc.traefik.io/traefik/routing/providers/docker/) documentation to learn how to configure Traefik to work with Docker.
+- Then implement the reverse proxy:
+  - relay the requests coming to "localhost" to the static HTTP server
+  - relay the requests coming to "localhost/api" to the API server. See the [Traefik router documentation](https://doc.traefik.io/traefik/routing/routers/) for managing routes based on path prefixes. 
+  - you will have to remove the `ports` configuration from the static and dynamic server in the docker compose file and replace them with `expose` configuration. Traefik will then be able to access the servers through the internal Docker network.
+- You can use the [Traefik dashboard](https://doc.traefik.io/traefik/operations/dashboard/) to monitor the state of the reverse proxy.
+
+### Acceptance criteria
+
+- [ ] You can do a demo where you start from an "empty" Docker environment (no container running) and using docker compose you can start your infrastructure with 3 containers: static server, dynamic server and reverse proxy
+- [ ] In the demo you can access each server from the browser in the demo. You can prove that the routing is done correctly through the reverse proxy.
+- [ ] You are able to explain how you have implemented the solution and walk us through the configuration and the code.
+- [ ] You are able to explain why a reverse proxy is useful to improve the security of the infrastructure.
+- [ ] You are able to explain how to access the dashboard of Traefik and how it works.
+- [ ] You have **documented** your configuration in your report.
+>>>>>>> 50e26d7e69c4c7fa0228a48cf92322bee2c5b4bd
 
 To test the reverse proxy, we first ran it using the `docker-compose up` command and then verified that the static Web site and the API were accessible from the host browser using the `localhost` address and the `localhost/api` address respectively. We then updated the Bruno collection stored in `api/tests` to use the `localhost/api` address and verified that the requests were correctly forwarded to the API.
 
